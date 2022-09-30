@@ -7,7 +7,11 @@ import { env } from "./env";
 const uploadToDropbox = async ({ name, path }: { name: string, path: string }) => {
   console.log("Uploading backup to Dropbox...");
 
-  const dbx = new Dropbox({ accessToken: env.DROPBOX_ACCESS_TOKEN });
+  const dbx = new Dropbox({ 
+    clientId: env.DROPBOX_APP_KEY,
+    clientSecret: env.DROPBOX_APP_SECRET,
+    refreshToken: env.DROPBOX_REFRESH_TOKEN
+  });
 
   readFile(path, (err, contents) => {
     if (err) {
@@ -15,7 +19,7 @@ const uploadToDropbox = async ({ name, path }: { name: string, path: string }) =
       console.log("Backup upload failed...")
     }
 
-    dbx.filesUpload({ path: env.DROPBOX_PATH + name, contents })
+    dbx.filesUpload({ path: env.DROPBOX_BACKUP_PATH + name, contents })
       .then((response: any) => {
         console.log(response);
         console.log("Backup uploaded to Dropbox...");

@@ -1,10 +1,10 @@
 import { envsafe, str } from "envsafe";
 
 export const env = envsafe({
-  DROPBOX_ACCESS_TOKEN: str({
-    desc: 'You can get it from Dropbox App Console.'
-  }),
-  DROPBOX_PATH: str(),
+  DROPBOX_APP_KEY: str(),
+  DROPBOX_APP_SECRET: str(),
+  DROPBOX_REFRESH_TOKEN: str(),
+  DROPBOX_BACKUP_PATH: str(),
   BACKUP_DATABASE_URL: str({
     desc: 'The connection string of the database to backup.'
   }),
